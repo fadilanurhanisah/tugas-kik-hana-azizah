@@ -1,0 +1,310 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ruang.Data Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- LOGIN -->
+  <section id="loginPage" class="login-page">
+    <div class="login-card">
+      <h1>Ruang<span> Data</span></h1>
+      <p>Sistem Pendataan Sosial Ekonomi Siswa</p>
+
+      <form id="loginForm">
+        <label>Username</label>
+        <input type="text" id="username" placeholder="Username" required>
+
+        <label>Password</label>
+        <input type="password" id="password" placeholder="Password" required>
+
+        <button type="submit">Masuk Dashboard</button>
+        <p id="loginMessage" class="message"></p>
+      </form>
+
+      <div class="demo-account">
+        Admin: admin / admin123<br>
+        Siswa: siswa / siswa123
+      </div>
+    </div>
+  </section>
+
+  <!-- DASHBOARD SISWA -->
+  <section id="studentPage" class="dashboard hidden">
+
+    <aside class="sidebar">
+      <h2>Ruang<span>.Data</span></h2>
+      <p class="sidebar-label">MENU SISWA</p>
+
+      <button class="nav-button active" onclick="showStudentSection('studentDashboard')">
+        <span>▦</span> Dashboard
+      </button>
+
+      <button class="nav-button" onclick="showStudentSection('studentFormSection')">
+        <span>▤</span> Form Pendataan
+      </button>
+
+      <button class="logout-button" onclick="logout()">Keluar</button>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <div>
+          <h1>Dashboard Siswa</h1>
+          <p>Selamat datang di sistem pendataan siswa.</p>
+        </div>
+        <div class="user-info">
+          <div class="avatar">S</div>
+          <span>Siswa</span>
+        </div>
+      </header>
+
+      <section id="studentDashboard" class="page-section">
+        <div class="welcome-card">
+          <div>
+            <span class="welcome-tag">RUANG.DATA</span>
+            <h2>Selamat Datang!</h2>
+            <p>Lengkapi data sosial ekonomi kamu agar dapat dikelola oleh pihak sekolah.</p>
+            <button onclick="showStudentSection('studentFormSection')">
+              Isi Data Sekarang
+            </button>
+          </div>
+          <div class="welcome-icon">▤</div>
+        </div>
+
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-icon">▣</div>
+            <p>Status Pendataan</p>
+            <h2 id="studentStatus">Belum Diisi</h2>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon">⌂</div>
+            <p>Data Lokasi Rumah</p>
+            <h2 id="studentLocationStatus">Belum Ada</h2>
+          </div>
+        </div>
+
+        <div class="content-card">
+          <h3>Informasi Sistem</h3>
+          <p class="muted">
+            Sistem ini digunakan untuk mengumpulkan informasi kondisi sosial
+            ekonomi siswa sebagai bahan pendataan dan administrasi sekolah.
+          </p>
+        </div>
+      </section>
+
+      <section id="studentFormSection" class="page-section hidden">
+        <div class="section-heading">
+          <h2>Form Pendataan Siswa</h2>
+          <p>Silakan lengkapi semua informasi berikut.</p>
+        </div>
+
+        <form id="studentForm" class="content-card">
+          <h3>Data Pribadi</h3>
+
+          <div class="form-grid">
+            <div>
+              <label>Nama Lengkap</label>
+              <input type="text" id="studentName" required>
+            </div>
+            <div>
+              <label>NIS</label>
+              <input type="text" id="nis" required>
+            </div>
+            <div>
+              <label>Kelas</label>
+              <input type="text" id="className" required>
+            </div>
+            <div>
+              <label>Nomor HP</label>
+              <input type="tel" id="phone" required>
+            </div>
+          </div>
+
+          <h3>Data Keluarga</h3>
+
+          <div class="form-grid">
+            <div>
+              <label>Nama Ayah</label>
+              <input type="text" id="fatherName" required>
+            </div>
+            <div>
+              <label>Pekerjaan Ayah</label>
+              <input type="text" id="fatherJob" required>
+            </div>
+            <div>
+              <label>Nama Ibu</label>
+              <input type="text" id="motherName" required>
+            </div>
+            <div>
+              <label>Pekerjaan Ibu</label>
+              <input type="text" id="motherJob" required>
+            </div>
+            <div>
+              <label>Status Keluarga</label>
+              <select id="familyStatus" required>
+                <option value="">Pilih status</option>
+                <option>Lengkap</option>
+                <option>Orang tua bercerai</option>
+                <option>Yatim</option>
+                <option>Piatu</option>
+                <option>Yatim Piatu</option>
+              </select>
+            </div>
+            <div>
+              <label>Penghasilan Orang Tua</label>
+              <select id="income" required>
+                <option value="">Pilih penghasilan</option>
+                <option>Di bawah Rp1.000.000</option>
+                <option>Rp1.000.000 - Rp2.000.000</option>
+                <option>Rp2.000.000 - Rp3.000.000</option>
+                <option>Rp3.000.000 - Rp5.000.000</option>
+                <option>Di atas Rp5.000.000</option>
+              </select>
+            </div>
+          </div>
+
+          <h3>Alamat dan Lokasi Rumah</h3>
+
+          <label>Alamat Rumah</label>
+          <textarea id="address" rows="3" required></textarea>
+
+          <label>Link Google Maps</label>
+          <input type="url" id="mapLink" placeholder="https://maps.app.goo.gl/..." required>
+          <small>Salin link lokasi rumah dari Google Maps.</small>
+
+          <h3>Foto Rumah</h3>
+          <label>Upload Foto Rumah</label>
+          <input type="file" id="housePhoto" accept="image/*">
+          <img id="photoPreview" class="photo-preview hidden" alt="Foto rumah">
+
+          <button type="submit" class="primary-button">Simpan Data</button>
+          <p id="studentMessage" class="message"></p>
+        </form>
+      </section>
+    </main>
+  </section>
+
+  <!-- DASHBOARD ADMIN -->
+  <section id="adminPage" class="dashboard hidden">
+
+    <aside class="sidebar">
+      <h2>Ruang<span>.Data</span></h2>
+      <p class="sidebar-label">MENU ADMIN</p>
+
+      <button class="nav-button active" onclick="showAdminSection('adminDashboard')">
+        <span>▦</span> Dashboard
+      </button>
+
+      <button class="nav-button" onclick="showAdminSection('adminDataSection')">
+        <span>▤</span> Data Siswa
+      </button>
+
+      <button class="logout-button" onclick="logout()">Keluar</button>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <div>
+          <h1>Dashboard Admin</h1>
+          <p>Ringkasan pendataan sosial ekonomi siswa.</p>
+        </div>
+
+        <div class="user-info">
+          <div class="avatar">A</div>
+          <span>Administrator</span>
+        </div>
+      </header>
+
+      <section id="adminDashboard" class="page-section">
+        <div class="welcome-card admin-welcome">
+          <div>
+            <span class="welcome-tag">ADMINISTRATOR</span>
+            <h2>Dashboard Pengelola Data</h2>
+            <p>Kelola dan pantau informasi sosial ekonomi siswa melalui satu halaman.</p>
+          </div>
+          <div class="welcome-icon">▦</div>
+        </div>
+
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-icon">♙</div>
+            <p>Total Siswa</p>
+            <h2 id="totalStudents">0</h2>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon">✓</div>
+            <p>Data Terkumpul</p>
+            <h2 id="completedStudents">0</h2>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon">⌂</div>
+            <p>Lokasi Tersedia</p>
+            <h2 id="locationCount">0</h2>
+          </div>
+        </div>
+
+        <div class="content-card">
+          <div class="card-heading">
+            <div>
+              <h3>Data Terbaru</h3>
+              <p class="muted">Daftar data siswa yang telah masuk.</p>
+            </div>
+            <button class="secondary-button" onclick="showAdminSection('adminDataSection')">
+              Lihat Semua
+            </button>
+          </div>
+          <div id="recentStudents"></div>
+        </div>
+      </section>
+
+      <section id="adminDataSection" class="page-section hidden">
+        <div class="section-heading">
+          <h2>Data Siswa</h2>
+          <p>Informasi siswa yang telah mengisi formulir pendataan.</p>
+        </div>
+
+        <div class="content-card">
+          <div class="card-heading">
+            <h3>Daftar Siswa</h3>
+            <input type="text" id="searchStudent" placeholder="Cari nama atau NIS...">
+          </div>
+
+          <div class="table-wrapper">
+            <table>
+              <thead>
+                <tr>
+                  <th>Nama Siswa</th>
+                  <th>NIS</th>
+                  <th>Kelas</th>
+                  <th>Penghasilan</th>
+                  <th>Aksi</th>
+                </tr>
+              </thead>
+              <tbody id="studentTable"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <div id="detailModal" class="modal hidden">
+        <div class="modal-content">
+          <button class="close-button" onclick="closeDetail()">×</button>
+          <h2>Detail Data Siswa</h2>
+          <div id="detailContent"></div>
+        </div>
+      </div>
+    </main>
+  </section>
+
+  <script src="script.js"></script>
+</body>
+</html>
